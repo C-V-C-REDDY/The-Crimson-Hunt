@@ -1,0 +1,147 @@
+[gd_scene load_steps=12 format=3 uid="uid://pbmyh1qru7p"]
+
+[ext_resource type="Script" uid="uid://bj7buyff1tobm" path="res://characters/happy_boo/happy_boo.gd" id="1_kg7lb"]
+[ext_resource type="Texture2D" uid="uid://bnufix5wep4it" path="res://characters/ground_shadow.png" id="2_62bos"]
+[ext_resource type="Texture2D" uid="uid://bjl6srygkhys3" path="res://characters/happy_boo/square_foot.png" id="3_186qq"]
+[ext_resource type="Texture2D" uid="uid://gmdx7a5xo5l5" path="res://characters/happy_boo/square_lower_leg.png" id="4_plnsd"]
+[ext_resource type="Texture2D" uid="uid://chtqvw6ub6aao" path="res://characters/happy_boo/square_upper_leg.png" id="5_q2t1e"]
+[ext_resource type="Texture2D" uid="uid://dc302m458gfoi" path="res://characters/happy_boo/square_body.png" id="6_w3ck4"]
+[ext_resource type="Texture2D" uid="uid://rm823fcgm5ea" path="res://characters/happy_boo/square_face.png" id="7_h5h8s"]
+
+[sub_resource type="Animation" id="Animation_l3moq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Colorizer/SquareBody:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.08726646]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Colorizer/SquareBody:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -40.606)]
+}
+
+[sub_resource type="Animation" id="Animation_2wjx3"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Colorizer/SquareBody:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.08726646, 0.08726646]
+}
+
+[sub_resource type="Animation" id="Animation_5u22s"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Colorizer/SquareBody:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, -40.606), Vector2(-1, -36.606)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5u22s"]
+_data = {
+&"RESET": SubResource("Animation_l3moq"),
+&"idle": SubResource("Animation_5u22s"),
+&"walk": SubResource("Animation_2wjx3")
+}
+
+[node name="HappyBoo" type="Node2D"]
+script = ExtResource("1_kg7lb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_5u22s")
+}
+playback_default_blend_time = 0.2
+
+[node name="GroundShadow" type="Sprite2D" parent="."]
+modulate = Color(0.898039, 0.878431, 0.831373, 1)
+z_index = -1
+z_as_relative = false
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_62bos")
+metadata/_edit_lock_ = true
+
+[node name="Colorizer" type="Node2D" parent="."]
+modulate = Color(1, 0.572549, 0.176471, 1)
+
+[node name="SquareUpperLegL" type="Sprite2D" parent="Colorizer"]
+position = Vector2(-10.6303, -27.3998)
+rotation = 0.4009
+scale = Vector2(0.997829, 0.999794)
+texture = ExtResource("5_q2t1e")
+offset = Vector2(0, 6)
+
+[node name="SquareLowerLegL" type="Sprite2D" parent="Colorizer/SquareUpperLegL"]
+position = Vector2(-4.76837e-07, 14)
+texture = ExtResource("4_plnsd")
+offset = Vector2(0, 6)
+
+[node name="SquareFootL" type="Sprite2D" parent="Colorizer/SquareUpperLegL/SquareLowerLegL"]
+position = Vector2(0, 12)
+rotation = -3.40666
+scale = Vector2(1.01116, 1)
+texture = ExtResource("3_186qq")
+offset = Vector2(-4, 0)
+
+[node name="SquareUpperLegR" type="Sprite2D" parent="Colorizer"]
+position = Vector2(9.20459, -29.9444)
+rotation = -0.213676
+scale = Vector2(0.999794, 0.999794)
+texture = ExtResource("5_q2t1e")
+offset = Vector2(0, 6)
+
+[node name="SquareLowerLegR" type="Sprite2D" parent="Colorizer/SquareUpperLegR"]
+position = Vector2(-4.76837e-07, 14)
+texture = ExtResource("4_plnsd")
+offset = Vector2(0, 6)
+
+[node name="SquareFootR" type="Sprite2D" parent="Colorizer/SquareUpperLegR/SquareLowerLegR"]
+position = Vector2(0, 12)
+rotation = -2.92296
+texture = ExtResource("3_186qq")
+offset = Vector2(-4, 0)
+
+[node name="SquareBody" type="Sprite2D" parent="Colorizer"]
+position = Vector2(-1, -40.606)
+rotation = -0.08726646
+scale = Vector2(0.9842, 0.990263)
+texture = ExtResource("6_w3ck4")
+offset = Vector2(0, -23)
+
+[node name="SquareFace" type="Sprite2D" parent="Colorizer/SquareBody"]
+position = Vector2(0, -17)
+texture = ExtResource("7_h5h8s")
+metadata/_edit_lock_ = true
