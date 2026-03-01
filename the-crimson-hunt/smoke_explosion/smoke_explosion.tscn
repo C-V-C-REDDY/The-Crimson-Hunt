@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dhmhmrth6rdce"]
+[gd_scene load_steps=13 format=3 uid="uid://dhmhmrth6rdce"]
 
 [ext_resource type="Shader" uid="uid://cjjy1aucj6gji" path="res://smoke_explosion/smoke_explosion.gdshader" id="1_bmef6"]
 [ext_resource type="Script" uid="uid://bmcptrd1f7ok" path="res://smoke_explosion/smoke_explosion.gd" id="1_kb8ql"]
@@ -36,95 +36,48 @@ shader_parameter/offset = 2.0
 shader_parameter/texture_offset = Vector2(0, 0)
 shader_parameter/color_gradient = SubResource("GradientTexture1D_mxd0d")
 
-[sub_resource type="Animation" id="Animation_6fv2e"]
+[sub_resource type="Animation" id="Animation_wlmr4"]
+resource_name = "explosion"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Smoke:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.2, 1.2), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_7v0fj"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Smoke:material:shader_parameter/offset")
+tracks/0/path = NodePath("Smoke:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [2.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Smoke:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Smoke:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.396078, 0.396078, 0.396078, 1)]
+"values": [Vector2(1e-05, 1e-05)]
 }
 
-[sub_resource type="Animation" id="Animation_viyco"]
-resource_name = "explosion"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Smoke:material:shader_parameter/offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [2.0, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Smoke:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(3, 3)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Smoke:modulate:a")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8msef"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a2hpn"]
 _data = {
-&"RESET": SubResource("Animation_6fv2e"),
-&"explosion": SubResource("Animation_viyco")
+&"RESET": SubResource("Animation_7v0fj"),
+&"explosion": SubResource("Animation_wlmr4")
 }
 
-[node name="SmokeExplosion" type="Node2D" unique_id=675191270]
+[node name="SmokeExplosion" type="Node2D"]
 z_index = 10
 script = ExtResource("1_kb8ql")
 
-[node name="Smoke" type="ColorRect" parent="." unique_id=1026069877]
+[node name="Smoke" type="ColorRect" parent="."]
 unique_name_in_owner = true
 modulate = Color(0.396078, 0.396078, 0.396078, 1)
 material = SubResource("ShaderMaterial_dssfe")
@@ -139,10 +92,13 @@ offset_right = 64.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(64, 64)
 color = Color(0.568627, 0.568627, 0.568627, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1180165920]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_8msef")
-autoplay = &"RESET"
+libraries = {
+&"": SubResource("AnimationLibrary_a2hpn")
+}
+autoplay = "RESET"

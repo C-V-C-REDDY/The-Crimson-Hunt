@@ -1,243 +1,151 @@
-[gd_scene format=3 uid="uid://ogik4s70pgwl"]
+[gd_scene load_steps=10 format=3 uid="uid://ogik4s70pgwl"]
 
-[ext_resource type="Texture2D" uid="uid://dvgfmy6vtvjji" path="res://characters/slime/slime_body.png" id="1_3j35h"]
+[ext_resource type="Texture2D" uid="uid://d00etucdryecx" path="res://characters/slime/slime_body.png" id="1_3j35h"]
 [ext_resource type="Script" uid="uid://dnbjp2524b1py" path="res://characters/slime/slime.gd" id="1_87y5x"]
-[ext_resource type="Texture2D" uid="uid://b7rhtttevhxtj" path="res://characters/ground_shadow.png" id="1_cq7ej"]
-[ext_resource type="Texture2D" uid="uid://c078jrp2yvc4s" path="res://characters/slime/slime_face.png" id="2_ygydt"]
-[ext_resource type="Texture2D" uid="uid://btbxea1f3vwot" path="res://characters/slime/slime_body_hurt.png" id="4_0qu0c"]
-[ext_resource type="Texture2D" uid="uid://cai2ijnbypqtr" path="res://characters/slime/slime_hurt_eyes.png" id="4_hi70h"]
+[ext_resource type="Texture2D" uid="uid://bnufix5wep4it" path="res://characters/ground_shadow.png" id="1_cq7ej"]
+[ext_resource type="Texture2D" uid="uid://qb6hmhpi6qvo" path="res://characters/slime/slime_face.png" id="2_ygydt"]
 
-[sub_resource type="Animation" id="Animation_y4lve"]
+[sub_resource type="Animation" id="Animation_648cb"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor/Face:position:y")
+tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-25.0]
+"values": [Vector2(0.5, 0.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Anchor/SlimeBody:scale")
+tracks/1/path = NodePath("Anchor/SlimeBody:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Anchor:position:y")
+tracks/2/path = NodePath("Anchor/SlimeBody/SlimeBodyHurt:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Anchor/Face/SlimeFace:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_ygydt")]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Anchor:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_lu163"]
+[sub_resource type="Animation" id="Animation_pyxg0"]
 resource_name = "hurt"
 length = 0.2
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor/Face/SlimeFace:texture")
+tracks/0/path = NodePath("Anchor/SlimeBody:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("4_hi70h"), ExtResource("2_ygydt")]
+"values": [true, false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Anchor/Face:position:y")
+tracks/1/path = NodePath("Anchor/SlimeBody/SlimeBodyHurt:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_w75ej"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [-25.0, -35.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Anchor:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(-2, -2, -2),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Anchor/SlimeBody/SlimeBodyHurt:modulate:a")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, -2, 1),
-"update": 0,
-"values": [0.0, 1.0, 0.0]
+"values": [Vector2(0.5, 0.5), Vector2(0.55, 0.45)]
 }
 
-[sub_resource type="Animation" id="Animation_71vdi"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor/Face:position:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(-2, -2, -2),
-"update": 0,
-"values": [-28.0, -24.0, -28.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Anchor/SlimeBody:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(-2, -2, -2),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.05, 0.95), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Anchor:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_l6fy2"]
+[sub_resource type="Animation" id="Animation_0qekm"]
 resource_name = "walk"
-length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Anchor:position:y")
+tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -20.0, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Anchor/SlimeBody:scale")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.9, 1.1), Vector2(1.1, 0.9), Vector2(0.9, 1.1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Anchor/Face:position:y")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.1, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [-24.0, -28.0, -24.0]
+"values": [Vector2(0.5, 0.5), Vector2(0.7, 0.3), Vector2(0.5, 0.5)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_j6cum"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pyxg0"]
 _data = {
-&"RESET": SubResource("Animation_y4lve"),
-&"hurt": SubResource("Animation_lu163"),
-&"idle": SubResource("Animation_71vdi"),
-&"walk": SubResource("Animation_l6fy2")
+&"RESET": SubResource("Animation_648cb"),
+&"hurt": SubResource("Animation_pyxg0"),
+&"idle": SubResource("Animation_w75ej"),
+&"walk": SubResource("Animation_0qekm")
 }
 
-[node name="Slime" type="Node2D" unique_id=2008890567]
+[node name="Slime" type="Node2D"]
+light_mask = 2
+visibility_layer = 3
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_87y5x")
 
-[node name="GroundShadow" type="Sprite2D" parent="." unique_id=2019923751]
+[node name="GroundShadow" type="Sprite2D" parent="."]
 modulate = Color(0.898039, 0.878431, 0.831373, 1)
 z_index = -1
 z_as_relative = false
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_cq7ej")
 
-[node name="Anchor" type="Marker2D" parent="." unique_id=794902193]
+[node name="Anchor" type="Marker2D" parent="."]
 
-[node name="SlimeBody" type="Sprite2D" parent="Anchor" unique_id=1727508908]
+[node name="SlimeBody" type="Sprite2D" parent="Anchor"]
 texture = ExtResource("1_3j35h")
 offset = Vector2(0, -36)
 
-[node name="SlimeBodyHurt" type="Sprite2D" parent="Anchor/SlimeBody" unique_id=2002072866]
+[node name="SlimeBodyHurt" type="Sprite2D" parent="Anchor/SlimeBody"]
+visible = false
 modulate = Color(1, 1, 1, 0)
-texture = ExtResource("4_0qu0c")
 offset = Vector2(0, -36)
 
-[node name="Face" type="Marker2D" parent="Anchor" unique_id=1541035147]
+[node name="Face" type="Marker2D" parent="Anchor"]
 position = Vector2(0, -25)
 
-[node name="SlimeFace" type="Sprite2D" parent="Anchor/Face" unique_id=403368551]
+[node name="SlimeFace" type="Sprite2D" parent="Anchor/Face"]
 texture = ExtResource("2_ygydt")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2007851046]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
-libraries/ = SubResource("AnimationLibrary_j6cum")
+libraries = {
+&"": SubResource("AnimationLibrary_pyxg0")
+}

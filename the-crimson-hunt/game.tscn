@@ -1,0 +1,128 @@
+[gd_scene load_steps=6 format=3 uid="uid://2tp8p1wld640"]
+
+[ext_resource type="PackedScene" uid="uid://cnwr5y20ibyjf" path="res://player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://53uldjxrrg5h" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://dv5lnhckfu83n" path="res://pine_tree.tscn" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://dqpk0jhtjsuff" path="res://score_lable.gd" id="4_fc0e3"]
+
+[sub_resource type="Curve2D" id="Curve2D_feb5d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -102, -92, 0, 0, 0, 0, -96, 712, 0, 0, 0, 0, 1268, 721, 0, 0, 0, 0, 1254, -98, 0, 0, 0, 0, -90, -104)
+}
+point_count = 5
+
+[node name="Game" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_fc0e3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -30
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_top = 9.0
+offset_right = 1165.0
+offset_bottom = 647.0
+
+[node name="Player" parent="." instance=ExtResource("1_80nbo")]
+position = Vector2(471, 329)
+
+[node name="Path2D" type="Path2D" parent="Player"]
+position = Vector2(-1243.9065, -756.56726)
+scale = Vector2(2.6087594, 2.4945455)
+curve = SubResource("Curve2D_feb5d")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D"]
+unique_name_in_owner = true
+position = Vector2(-102, -92)
+rotation = 1.5633337
+
+[node name="PineTree" parent="." instance=ExtResource("2_e2o6t")]
+position = Vector2(134, 434)
+
+[node name="PineTree2" parent="." instance=ExtResource("2_e2o6t")]
+position = Vector2(586, 190)
+
+[node name="PineTree3" parent="." instance=ExtResource("2_e2o6t")]
+position = Vector2(888, 539)
+
+[node name="PineTree4" parent="." instance=ExtResource("2_e2o6t")]
+position = Vector2(854, 260)
+
+[node name="PineTree5" parent="." instance=ExtResource("2_e2o6t")]
+position = Vector2(723, 373)
+
+[node name="PineTree6" parent="." instance=ExtResource("2_e2o6t")]
+position = Vector2(248, 157)
+
+[node name="PineTree7" parent="." instance=ExtResource("2_e2o6t")]
+position = Vector2(423, 554)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 3.0
+offset_right = 12.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="Label" type="Label" parent="GameOver/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = -297.0
+offset_right = 374.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "
+
+.............GAME OVER.................
+"
+
+[node name="Button" type="Button" parent="GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -127.0
+offset_top = 37.0
+offset_right = 63.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "RESTART HUNT"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ScoreLable" type="Label" parent="UI"]
+offset_left = 9.0
+offset_top = 15.0
+offset_right = 63.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0, 0, 0, 0.99607843)
+theme_override_font_sizes/font_size = 20
+text = "Kills : 0"
+script = ExtResource("4_fc0e3")
+
+[connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="GameOver/Button" to="." method="_on_button_pressed"]

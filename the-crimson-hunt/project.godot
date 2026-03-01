@@ -11,8 +11,12 @@ config_version=5
 [application]
 
 config/name="The Crimson Hunt"
-run/main_scene="uid://cnwr5y20ibyjf"
+run/main_scene="uid://2tp8p1wld640"
 config/features=PackedStringArray("4.5", "Forward Plus")
+
+[autoload]
+
+Global="*res://Global.gd"
 
 [input]
 
