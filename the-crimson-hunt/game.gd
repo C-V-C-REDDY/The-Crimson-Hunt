@@ -34,3 +34,13 @@ func _on_button_pressed() -> void:
 	get_tree().paused = false
 	Global.kills = 0
 	get_tree().reload_current_scene()
+
+
+func _on_elite_timer_timeout() -> void:
+	var slime_scene = preload("res://mob.tscn")
+	var elite_slime = slime_scene.instantiate()
+	
+	elite_slime.is_elite = true
+	var spawn_pos = Vector2(randf_range(-500 , 500) , randf_range(-500 , 500))
+	elite_slime.global_position = %Player.global_position + spawn_pos
+	add_child(elite_slime)

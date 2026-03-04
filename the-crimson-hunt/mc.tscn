@@ -1,0 +1,109 @@
+[gd_scene load_steps=8 format=3 uid="uid://bov4fmvvngu1p"]
+
+[ext_resource type="Texture2D" uid="uid://kx2kbgwtf0vn" path="res://trees/Gemini_Generated_Image_4ywnn34ywnn34ywn-removebg-preview.png" id="1_hk2bv"]
+[ext_resource type="Script" uid="uid://c0pklwua0lhdl" path="res://mc.gd" id="2_bmift"]
+
+[sub_resource type="Animation" id="Animation_bmift"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.43333334, 0.6333333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 5, 6, 7, 0]
+}
+
+[sub_resource type="Animation" id="Animation_qpb7m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -10)]
+}
+
+[sub_resource type="Animation" id="Animation_fsusg"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.100000024, 0.2666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -10), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n7kyw"]
+_data = {
+&"RESET": SubResource("Animation_qpb7m"),
+&"idle": SubResource("Animation_fsusg"),
+&"walk": SubResource("Animation_bmift")
+}
+
+[sub_resource type="Environment" id="Environment_bmift"]
+background_mode = 3
+glow_enabled = true
+glow_levels/4 = 1.0
+glow_levels/6 = 1.0
+glow_strength = 0.2
+glow_hdr_threshold = 1.2
+
+[node name="MC" type="Sprite2D"]
+modulate = Color(1.765975, 8.356168, 18.241463, 1)
+position = Vector2(0, -10)
+texture = ExtResource("1_hk2bv")
+hframes = 4
+vframes = 2
+frame = 1
+script = ExtResource("2_bmift")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_n7kyw")
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bmift")

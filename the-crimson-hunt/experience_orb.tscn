@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddqb6hdrv3cd6"]
+
+[ext_resource type="Texture2D" uid="uid://cclc18j46f654" path="res://trees/blood_splat.png" id="1_140j5"]
+[ext_resource type="Script" uid="uid://57sphfkqrilb" path="res://experience_orb.gd" id="1_kqtk4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kqtk4"]
+radius = 89.19641
+
+[node name="ExperienceOrb" type="Area2D"]
+script = ExtResource("1_kqtk4")
+
+[node name="Orb" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 15
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_140j5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 0)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_kqtk4")

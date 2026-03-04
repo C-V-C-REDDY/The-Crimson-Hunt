@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://2tp8p1wld640"]
+[gd_scene load_steps=7 format=3 uid="uid://2tp8p1wld640"]
 
 [ext_resource type="PackedScene" uid="uid://cnwr5y20ibyjf" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://53uldjxrrg5h" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="PackedScene" uid="uid://dv5lnhckfu83n" path="res://pine_tree.tscn" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://1mkfkc1dglxq" path="res://trees/Tile_25-256x256.png" id="2_7jktm"]
 [ext_resource type="Script" uid="uid://dqpk0jhtjsuff" path="res://score_lable.gd" id="4_fc0e3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jktm"]
+bg_color = Color(1.4948927, 0, 0.39436692, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
@@ -15,16 +22,58 @@ point_count = 5
 y_sort_enabled = true
 script = ExtResource("1_fc0e3")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = -30
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ScoreLable" type="Label" parent="UI"]
+z_index = 5
+offset_left = 30.0
 offset_top = 9.0
-offset_right = 1165.0
-offset_bottom = 647.0
+offset_right = 97.0
+offset_bottom = 37.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.99607843)
+theme_override_font_sizes/font_size = 20
+text = "Kills : 0"
+script = ExtResource("4_fc0e3")
+
+[node name="LevelLable" type="Label" parent="UI"]
+unique_name_in_owner = true
+offset_left = 259.0
+offset_top = -1.0
+offset_right = 375.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 25
+text = "Level : 1"
+
+[node name="XPBar" type="ProgressBar" parent="UI"]
+unique_name_in_owner = true
+offset_left = 371.0
+offset_top = 14.0
+offset_right = 798.0
+offset_bottom = 27.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_7jktm")
+value = 100.0
+show_percentage = false
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(4000, 4000)
+
+[node name="Tile25256x256" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(0.30110523, 3.5195612e-07, 9.62615e-08, 1)
+z_index = -10
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(550, 199.00002)
+scale = Vector2(0.93359375, 0.91796875)
+texture = ExtResource("2_7jktm")
+region_enabled = true
+region_rect = Rect2(0, 0, 5000, 5000)
 
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
-position = Vector2(471, 329)
+unique_name_in_owner = true
+z_index = 10
+position = Vector2(597, 399)
 
 [node name="Path2D" type="Path2D" parent="Player"]
 position = Vector2(-1243.9065, -756.56726)
@@ -35,27 +84,6 @@ curve = SubResource("Curve2D_feb5d")
 unique_name_in_owner = true
 position = Vector2(-102, -92)
 rotation = 1.5633337
-
-[node name="PineTree" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(134, 434)
-
-[node name="PineTree2" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(586, 190)
-
-[node name="PineTree3" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(888, 539)
-
-[node name="PineTree4" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(854, 260)
-
-[node name="PineTree5" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(723, 373)
-
-[node name="PineTree6" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(248, 157)
-
-[node name="PineTree7" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(423, 554)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
@@ -111,18 +139,11 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 25
 text = "RESTART HUNT"
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="ScoreLable" type="Label" parent="UI"]
-offset_left = 9.0
-offset_top = 15.0
-offset_right = 63.0
-offset_bottom = 38.0
-theme_override_colors/font_color = Color(0, 0, 0, 0.99607843)
-theme_override_font_sizes/font_size = 20
-text = "Kills : 0"
-script = ExtResource("4_fc0e3")
+[node name="EliteTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
 
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="GameOver/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="EliteTimer" to="." method="_on_elite_timer_timeout"]
