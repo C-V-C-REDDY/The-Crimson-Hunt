@@ -10,7 +10,8 @@ func _ready() -> void:
 	%Slime.play_walk()
 	if is_elite:
 		%Slime.modulate = Color(2.0 , 0.3 , 0.3)
-		scale = Vector2(1.0 , 1.0)
+		scale = Vector2(1.5 , 1.5)
+		
 		health = 5
 	else:
 		%Slime.modulate = Color(0.8 , 0.1 , 1.0)
