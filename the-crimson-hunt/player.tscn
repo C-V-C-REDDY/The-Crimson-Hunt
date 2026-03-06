@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnwr5y20ibyjf"]
+[gd_scene load_steps=13 format=3 uid="uid://cnwr5y20ibyjf"]
 
 [ext_resource type="Script" uid="uid://dmukwvwmyll02" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://bov4fmvvngu1p" path="res://mc.tscn" id="2_i3pqv"]
@@ -26,6 +26,26 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
 radius = 158.11388
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i3pqv"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_i3pqv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hqtel"]
+curve = SubResource("Curve_i3pqv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i3pqv"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+initial_velocity_max = 73.17
+gravity = Vector3(0, -50, 0)
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_hqtel")
+color = Color(0.98, 0.36390665, 0.078399986, 0.3764706)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(0.5, 0.5)
@@ -70,5 +90,12 @@ show_percentage = false
 position = Vector2(-2, -44)
 shape = SubResource("CircleShape2D_hqtel")
 debug_color = Color(0.42268, 3.6820024e-06, 0.28268322, 0.41960785)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_i3pqv")
+scale = Vector2(3, 3)
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_i3pqv")
 
 [connection signal="area_entered" from="CollectionRange" to="." method="_on_collection_range_area_entered"]

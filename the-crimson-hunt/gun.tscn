@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://br337d1tt6grv"]
+[gd_scene load_steps=5 format=3 uid="uid://br337d1tt6grv"]
 
 [ext_resource type="Script" uid="uid://oy8rq2lrgqc8" path="res://gun.gd" id="1_dk5gl"]
 [ext_resource type="Texture2D" uid="uid://c7cc4od2oaxvu" path="res://pistol/pistol.png" id="1_vk1bi"]
+[ext_resource type="Texture2D" uid="uid://bh2i85pq18cmf" path="res://smoke_explosion/istockphoto-1444153806-612x612.jpg" id="3_kw0bs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dk5gl"]
 radius = 456.0011
@@ -12,7 +13,7 @@ collision_mask = 2
 script = ExtResource("1_dk5gl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 1)
+position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_dk5gl")
 
 [node name="WeponPivot" type="Marker2D" parent="."]
@@ -34,5 +35,14 @@ rotation = 0.0069106366
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
+
+[node name="muzzel_flash" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(78.82125, -21)
+scale = Vector2(0.016924012, 0.038560048)
+enabled = false
+color = Color(3.7119222, 2.2396336, 0.767345, 1)
+energy = 10.0
+texture = ExtResource("3_kw0bs")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
