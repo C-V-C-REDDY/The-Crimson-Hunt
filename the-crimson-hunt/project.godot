@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 
 Global="*res://Global.gd"
 
+[global_group]
+
+mobs=""
+
 [input]
 
 left={
