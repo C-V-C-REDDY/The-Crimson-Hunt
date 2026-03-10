@@ -3,6 +3,8 @@ extends Node2D
 @onready var charge_timer = $ChargeTimer
 @onready var cooldown_timer = $CooldownTimer
 @onready var camera = get_viewport().get_camera_2d()
+@onready var crimson_logo: TextureRect = $"../../UI/CrimsonLogo"
+@onready var texture_progress_bar: TextureProgressBar = $"../../UI/CrimsonLogo/TextureProgressBar"
 
 var is_charging: bool = false
 var has_burst_fired: bool = false 
@@ -11,15 +13,18 @@ func _process(_delta):
 	# 1. Update visual effects while charging
 	if is_charging:
 		update_charge_effects()
+		update_ui_display()
 		return 
 
 	# 2. Check for activation
 	if Input.is_action_just_pressed("ui_accept"): 
 		if get_parent().level >= 3 and cooldown_timer.is_stopped():
 			start_crimson_charge()
+			
 		elif not cooldown_timer.is_stopped():
 			print("Ability on cooldown : ", int(cooldown_timer.time_left),"s remaining")
-	
+	update_logo_visuals()
+	update_ui_display()
 func start_crimson_charge():
 	is_charging = true
 	has_burst_fired = false 
@@ -63,8 +68,29 @@ func execute_crimson_burst():
 				
 	# Start the 45s cooldown AFTER the wipe is finished
 	cooldown_timer.start(45.0)
-
-
+func update_logo_visuals():
+	if get_parent().level < 3 or not cooldown_timer.is_stopped():
+		crimson_logo.modulate = Color(0.3 , 0.3 , 0.3 ,0.5)
+	else:
+		crimson_logo.modulate = Color(2.5 , 0.2 , 0.2)
+func update_ui_display():
+	if not texture_progress_bar: return
+	texture_progress_bar.tint_under = Color(0.1 , 0.1 , 0.1 , 0.6)
+	if not cooldown_timer.is_stopped():
+		texture_progress_bar.value = cooldown_timer.time_left
+		texture_progress_bar.tint_progress = Color(0.8 , 0 , 0 , 1.0)
+	elif is_charging:
+		texture_progress_bar.value = 0
+		texture_progress_bar.tint_under = Color(0 , 0, 0 , 1.0)
+	elif get_parent().level >= 3:
+		texture_progress_bar.value = 0
+		texture_progress_bar.tint_progress = Color(2.0 , 0.2 , 0.2 , 1.0)
+		texture_progress_bar.tint_under = Color(0.4 , 0 , 0 , 1.0)
+	else:
+		texture_progress_bar.value = 0
+		texture_progress_bar.tint_under = Color(0.2 , 0.2 , 0.2 , 0.3)
+	
+	
 func _on_cooldown_timer_timeout() -> void:
 	if not has_burst_fired:
 		execute_crimson_burst()
