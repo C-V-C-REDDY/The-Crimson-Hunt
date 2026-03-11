@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://2tp8p1wld640"]
+[gd_scene load_steps=16 format=3 uid="uid://2tp8p1wld640"]
 
 [ext_resource type="PackedScene" uid="uid://cnwr5y20ibyjf" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://53uldjxrrg5h" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://1mkfkc1dglxq" path="res://trees/Tile_25-256x256.png" id="2_7jktm"]
+[ext_resource type="FontFile" uid="uid://c157b3i5g60yy" path="res://characters/happy_boo/MetalMania-Regular.ttf" id="2_ryrav"]
 [ext_resource type="Texture2D" uid="uid://cu33xbu7du5h1" path="res://pistol/30.png" id="3_7jktm"]
 [ext_resource type="Script" uid="uid://dqpk0jhtjsuff" path="res://score_lable.gd" id="4_fc0e3"]
 
@@ -15,11 +16,110 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7jktm"]
 
+[sub_resource type="Animation" id="Animation_ryrav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="Animation" id="Animation_7jktm"]
+resource_name = "Ready"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.25, 0.25), Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eow3j"]
+_data = {
+&"RESET": SubResource("Animation_ryrav"),
+&"Ready": SubResource("Animation_7jktm")
+}
+
 [sub_resource type="Curve2D" id="Curve2D_feb5d"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -102, -92, 0, 0, 0, 0, -96, 712, 0, 0, 0, 0, 1268, 721, 0, 0, 0, 0, 1254, -98, 0, 0, 0, 0, -90, -104)
 }
 point_count = 5
+
+[sub_resource type="Animation" id="Animation_j5wjh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/MenuPivot/MenuBox:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_eow3j"]
+resource_name = "ShowGameOver"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer/MenuPivot/MenuBox:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vef74"]
+_data = {
+&"RESET": SubResource("Animation_j5wjh"),
+&"ShowGameOver": SubResource("Animation_eow3j")
+}
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -27,32 +127,41 @@ script = ExtResource("1_fc0e3")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ScoreLable" type="Label" parent="UI"]
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 84.0
+offset_bottom = 69.5
+scale = Vector2(2, 2)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+
+[node name="LevelLable" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.9999947, 0.9474096, 0.9387276, 1)
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ryrav")
+theme_override_font_sizes/font_size = 25
+text = "Level : 1"
+
+[node name="ScoreLable" type="Label" parent="UI/MarginContainer/VBoxContainer"]
 z_index = 5
-offset_left = 30.0
-offset_top = 9.0
-offset_right = 97.0
-offset_bottom = 37.0
-theme_override_colors/font_color = Color(1, 1, 1, 0.99607843)
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9902038, 0.32118273, 0.30245796, 0.99607843)
+theme_override_fonts/font = ExtResource("2_ryrav")
 theme_override_font_sizes/font_size = 20
 text = "Kills : 0"
 script = ExtResource("4_fc0e3")
 
-[node name="LevelLable" type="Label" parent="UI"]
-unique_name_in_owner = true
-offset_left = 259.0
-offset_top = -1.0
-offset_right = 375.0
-offset_bottom = 34.0
-theme_override_font_sizes/font_size = 25
-text = "Level : 1"
-
 [node name="XPBar" type="ProgressBar" parent="UI"]
 unique_name_in_owner = true
-offset_left = 371.0
-offset_top = 14.0
-offset_right = 798.0
-offset_bottom = 27.0
+offset_left = 173.0
+offset_top = 27.0
+offset_right = 1143.0
+offset_bottom = 43.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_7jktm")
 value = 100.0
 show_percentage = false
@@ -66,28 +175,35 @@ anchor_left = 1.0
 anchor_top = 0.994
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -168.00006
-offset_top = -152.112
-offset_right = 344.0
-offset_bottom = 356.0
+offset_left = -140.0
+offset_top = -132.11206
+offset_right = 417.49243
+offset_bottom = 392.7356
 grow_horizontal = 0
 grow_vertical = 0
 rotation = -0.0075261523
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_7jktm")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="UI/CrimsonLogo"]
 layout_mode = 0
-offset_left = -13.35784
-offset_top = 3.232893
-offset_right = 517.2879
-offset_bottom = 517.94507
+offset_left = -16.565847
+offset_top = -13.458391
+offset_right = 556.9068
+offset_bottom = 523.5416
 max_value = 45.0
 step = 0.01
 fill_mode = 4
+nine_patch_stretch = true
 texture_under = ExtResource("3_7jktm")
 texture_progress = ExtResource("3_7jktm")
 tint_under = Color(1, 1, 1, 0.19607843)
+
+[node name="ReadyAnimation" type="AnimationPlayer" parent="UI/CrimsonLogo"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_eow3j")
+}
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -108,7 +224,7 @@ region_rect = Rect2(0, 0, 5000, 5000)
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
 unique_name_in_owner = true
 z_index = 10
-position = Vector2(577, 504)
+position = Vector2(589, 503)
 
 [node name="Path2D" type="Path2D" parent="Player"]
 position = Vector2(-1243.9065, -756.56726)
@@ -126,9 +242,11 @@ autostart = true
 [node name="GameOver" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 process_mode = 3
+layer = 100
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="GameOver"]
+[node name="Background" type="ColorRect" parent="GameOver"]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -140,39 +258,53 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5137255)
 
-[node name="Label" type="Label" parent="GameOver/ColorRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -325.0
-offset_top = -297.0
-offset_right = 374.0
-offset_bottom = -12.0
+[node name="CenterContainer" type="CenterContainer" parent="GameOver"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "
 
-.............GAME OVER.................
+[node name="MenuPivot" type="Control" parent="GameOver/CenterContainer"]
+layout_mode = 2
+
+[node name="MenuBox" type="VBoxContainer" parent="GameOver/CenterContainer/MenuPivot"]
+layout_mode = 0
+offset_left = -274.0
+offset_top = -164.0
+offset_right = 273.0
+offset_bottom = 164.0
+scale = Vector2(1e-05, 1e-05)
+theme_override_constants/separation = 30
+
+[node name="Title" type="Label" parent="GameOver/CenterContainer/MenuPivot/MenuBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ryrav")
+theme_override_font_sizes/font_size = 50
+text = "\"DOMAIN COLLAPSED\"
 "
 
-[node name="Button" type="Button" parent="GameOver"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -127.0
-offset_top = 37.0
-offset_right = 63.0
-offset_bottom = 124.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ScoreLable" type="Label" parent="GameOver/CenterContainer/MenuPivot/MenuBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ryrav")
+text = "\"Purged: 0\""
+
+[node name="RestartButton" type="Button" parent="GameOver/CenterContainer/MenuPivot/MenuBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ryrav")
 theme_override_font_sizes/font_size = 25
 text = "RESTART HUNT"
+
+[node name="QuitButton" type="Button" parent="GameOver/CenterContainer/MenuPivot/MenuBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ryrav")
+text = "\"ABANDON\""
+
+[node name="GameOverUI" type="AnimationPlayer" parent="GameOver"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_vef74")
+}
 
 [node name="EliteTimer" type="Timer" parent="."]
 wait_time = 10.0
@@ -180,5 +312,6 @@ autostart = true
 
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="GameOver/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GameOver/CenterContainer/MenuPivot/MenuBox/RestartButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GameOver/CenterContainer/MenuPivot/MenuBox/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="timeout" from="EliteTimer" to="." method="_on_elite_timer_timeout"]

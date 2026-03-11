@@ -5,6 +5,7 @@ extends Node2D
 @onready var camera = get_viewport().get_camera_2d()
 @onready var crimson_logo: TextureRect = $"../../UI/CrimsonLogo"
 @onready var texture_progress_bar: TextureProgressBar = $"../../UI/CrimsonLogo/TextureProgressBar"
+@onready var ready_animation: AnimationPlayer = $"../../UI/CrimsonLogo/ReadyAnimation"
 
 var is_charging: bool = false
 var has_burst_fired: bool = false 
@@ -71,14 +72,16 @@ func execute_crimson_burst():
 func update_logo_visuals():
 	if get_parent().level < 3 or not cooldown_timer.is_stopped():
 		crimson_logo.modulate = Color(0.3 , 0.3 , 0.3 ,0.5)
+		stop_ready_animation()
 	else:
 		crimson_logo.modulate = Color(2.5 , 0.2 , 0.2)
+		play_ready_animation()
 func update_ui_display():
 	if not texture_progress_bar: return
 	texture_progress_bar.tint_under = Color(0.1 , 0.1 , 0.1 , 0.6)
 	if not cooldown_timer.is_stopped():
 		texture_progress_bar.value = cooldown_timer.time_left
-		texture_progress_bar.tint_progress = Color(0.8 , 0 , 0 , 1.0)
+		texture_progress_bar.tint_progress = Color(2.0 , 0 , 0 , 1.0)
 	elif is_charging:
 		texture_progress_bar.value = 0
 		texture_progress_bar.tint_under = Color(0 , 0, 0 , 1.0)
@@ -89,8 +92,14 @@ func update_ui_display():
 	else:
 		texture_progress_bar.value = 0
 		texture_progress_bar.tint_under = Color(0.2 , 0.2 , 0.2 , 0.3)
+func play_ready_animation():
+	ready_animation.play("Ready")
+func stop_ready_animation():
+	ready_animation.stop()
+
 	
-	
+
 func _on_cooldown_timer_timeout() -> void:
+	
 	if not has_burst_fired:
 		execute_crimson_burst()
