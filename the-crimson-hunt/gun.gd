@@ -1,6 +1,5 @@
 extends Area2D
 
-
 func _physics_process(_delta):
 	var enemies_in_range = get_overlapping_bodies()
 	if enemies_in_range.size() > 0:
@@ -20,6 +19,7 @@ func shoot():
 	position.x = -20
 	var tween = create_tween()
 	tween.tween_property(self, "position:x" , 0 , 0.1).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)
+
 
 func _on_timer_timeout() -> void:
 	shoot()
