@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx4emifseh15"]
+
+[ext_resource type="Texture2D" uid="uid://d00etucdryecx" path="res://characters/slime/slime_body.png" id="1_ds2si"]
+
+[node name="Healer" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ds2si")

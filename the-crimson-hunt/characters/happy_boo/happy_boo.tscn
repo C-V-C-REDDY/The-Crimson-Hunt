@@ -1,9 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://pbmyh1qru7p"]
+[gd_scene load_steps=11 format=3 uid="uid://dkjh1u0lrscgi"]
 
-[ext_resource type="Script" uid="uid://bj7buyff1tobm" path="res://characters/happy_boo/happy_boo.gd" id="1_kg7lb"]
 [ext_resource type="Texture2D" uid="uid://bnufix5wep4it" path="res://characters/ground_shadow.png" id="2_62bos"]
-[ext_resource type="Texture2D" uid="uid://bjl6srygkhys3" path="res://characters/happy_boo/square_foot.png" id="3_186qq"]
-[ext_resource type="Texture2D" uid="uid://gmdx7a5xo5l5" path="res://characters/happy_boo/square_lower_leg.png" id="4_plnsd"]
 [ext_resource type="Texture2D" uid="uid://chtqvw6ub6aao" path="res://characters/happy_boo/square_upper_leg.png" id="5_q2t1e"]
 [ext_resource type="Texture2D" uid="uid://dc302m458gfoi" path="res://characters/happy_boo/square_body.png" id="6_w3ck4"]
 [ext_resource type="Texture2D" uid="uid://rm823fcgm5ea" path="res://characters/happy_boo/square_face.png" id="7_h5h8s"]
@@ -124,10 +121,15 @@ _data = {
 &"walk": SubResource("Animation_2wjx3")
 }
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c5xj7"]
+load_path = "res://.godot/imported/square_lower_leg.png-313909793abe38b44566c8e252c075e0.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5da05"]
+load_path = "res://.godot/imported/square_foot.png-62023e9ce7985c4b370739df29445354.ctex"
+
 [node name="HappyBoo" type="Node2D"]
 position = Vector2(0, -10)
 rotation = 0.08726646
-script = ExtResource("1_kg7lb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -156,14 +158,14 @@ offset = Vector2(0, 6)
 
 [node name="SquareLowerLegL" type="Sprite2D" parent="Colorizer/SquareUpperLegL"]
 position = Vector2(-4.76837e-07, 14)
-texture = ExtResource("4_plnsd")
+texture = SubResource("CompressedTexture2D_c5xj7")
 offset = Vector2(0, 6)
 
 [node name="SquareFootL" type="Sprite2D" parent="Colorizer/SquareUpperLegL/SquareLowerLegL"]
 position = Vector2(0, 12)
 rotation = -3.40666
 scale = Vector2(1.01116, 1)
-texture = ExtResource("3_186qq")
+texture = SubResource("CompressedTexture2D_5da05")
 offset = Vector2(-4, 0)
 
 [node name="SquareUpperLegR" type="Sprite2D" parent="Colorizer"]
@@ -175,13 +177,13 @@ offset = Vector2(0, 6)
 
 [node name="SquareLowerLegR" type="Sprite2D" parent="Colorizer/SquareUpperLegR"]
 position = Vector2(-4.76837e-07, 14)
-texture = ExtResource("4_plnsd")
+texture = SubResource("CompressedTexture2D_c5xj7")
 offset = Vector2(0, 6)
 
 [node name="SquareFootR" type="Sprite2D" parent="Colorizer/SquareUpperLegR/SquareLowerLegR"]
 position = Vector2(0, 12)
 rotation = -2.92296
-texture = ExtResource("3_186qq")
+texture = SubResource("CompressedTexture2D_5da05")
 offset = Vector2(-4, 0)
 
 [node name="SquareBody" type="Sprite2D" parent="Colorizer"]
