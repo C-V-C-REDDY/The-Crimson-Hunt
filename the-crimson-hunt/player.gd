@@ -25,6 +25,12 @@ func level_up():
 	xp_bar.value = experience
 	update_level_display()
 	current_speed += speed_bost_amount
+	health += 25
+	if health > 100:
+		health = 100
+	
+	update_health_ui()
+	print("Healed! Current health:" , health)
 	var speed_tween = create_tween()
 	speed_tween.tween_property(self , "scale" , Vector2(0.7 , 0.7) ,0.1)
 	speed_tween.tween_property(self ,"scale" , Vector2(0.5, 0.5) ,0.1)
@@ -55,12 +61,13 @@ func _physics_process(delta):
 	var overlapping_mobs = %HurtBox.get_overlapping_bodies()
 	if overlapping_mobs.size() > 0:
 		health -= DAMAGE_RATE * overlapping_mobs.size() * delta
-		%ProgressBar.value = health
+		update_health_ui()
 		
 		if health <= 0.0:
 			health_depleted.emit()
 		
-
+func update_health_ui():
+	%ProgressBar.value = health
 
 func _on_collection_range_area_entered(area: Area2D) -> void:
 	if area.is_in_group("orbs"):
