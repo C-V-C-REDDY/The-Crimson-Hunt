@@ -5,16 +5,18 @@ var health = 2
 var is_elite = false
 const ORB_SCENE = preload("res://experience_orb.tscn")
 @onready var player  = get_node("/root/Game/Player")
+var speed = 200.0
 
 func _ready() -> void:
 	%Slime.play_walk()
 	if is_elite:
 		%Slime.modulate = Color(2.0 , 0.3 , 0.3)
 		scale = Vector2(1.5 , 1.5)
-		
+		speed = 375.0
 		health = 5
 	else:
 		%Slime.modulate = Color(0.8 , 0.1 , 1.0)
+		speed = 200.0
 
 func _process(_delta: float) -> void:
 	var player = get_tree().get_first_node_in_group("player")
@@ -28,7 +30,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(_delta):
 	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * 200.0
+	velocity = direction * speed
 	move_and_slide()
 
 func take_damage():
