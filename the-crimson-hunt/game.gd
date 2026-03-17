@@ -22,11 +22,25 @@ func _process(delta: float) -> void:
 
 	time_passed += delta
 	if time_passed < 30:
-		timer.wait_time = 2.0
+		timer.wait_time = 2.0  
+	
 	elif time_passed < 60:
 		timer.wait_time = 1.0
 	else:
 		timer.wait_time = 0.5
+
+	if time_passed < 30:
+		%EliteTimer.wait_time = 9.0
+	elif time_passed < 60:
+		%EliteTimer.wait_time = 8.0
+	elif time_passed < 120:
+		%EliteTimer.wait_time = 7.0
+	elif time_passed < 240:
+		%EliteTimer.wait_time = 6.0
+	else:
+		%EliteTimer.wait_time = 5.0
+		
+		
 
 
 func _on_button_pressed() -> void:

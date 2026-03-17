@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://diagyha1ete72"]
+[gd_scene load_steps=10 format=3 uid="uid://diagyha1ete72"]
 
 [ext_resource type="Script" uid="uid://bsxg21e0qi1fu" path="res://start_menu.gd" id="1_jwbto"]
 [ext_resource type="Texture2D" uid="uid://cq12qol3rs3hr" path="res://Gemini_Generated_Image_js7howjs7howjs7h.png" id="2_ia0g5"]
 [ext_resource type="Texture2D" uid="uid://ctly5tu254k6g" path="res://addons/colorpicker_presets/20251117darkDwellersHeaderA.png" id="3_ctwoq"]
 [ext_resource type="FontFile" uid="uid://c157b3i5g60yy" path="res://characters/happy_boo/MetalMania-Regular.ttf" id="3_vpdu5"]
+[ext_resource type="Texture2D" uid="uid://c1yhus1botmqg" path="res://addons/colorpicker_presets/20251117darkDwellersHeaderB.png" id="5_ppfnh"]
 
 [sub_resource type="GDScript" id="GDScript_ia0g5"]
 
@@ -85,25 +86,28 @@ layout_mode = 2
 layout_mode = 0
 offset_left = -14.0
 offset_top = 9.0
-offset_right = 90.5
-offset_bottom = 110.0
+offset_right = 82.0
+offset_bottom = 113.0
 scale = Vector2(3, 3)
 theme_override_constants/separation = 40
 
 [node name="Start" type="TextureButton" parent="CenterContainer/Control/VBoxContainer"]
 unique_name_in_owner = true
-modulate = Color(0.91973937, 0.07106788, 0.2846426, 1)
+modulate = Color(0.98, 0.009799991, 0.31702992, 1)
 layout_mode = 2
-texture_normal = ExtResource("3_ctwoq")
+texture_normal = ExtResource("5_ppfnh")
+texture_pressed = ExtResource("5_ppfnh")
+texture_hover = ExtResource("3_ctwoq")
 
 [node name="Label" type="Label" parent="CenterContainer/Control/VBoxContainer/Start"]
+modulate = Color(1, 0.30005085, 0.23680493, 1)
 layout_mode = 0
-offset_left = 14.666668
-offset_top = 3.3333333
-offset_right = 83.66667
-offset_bottom = 26.333334
+offset_left = -2.3333335
+offset_top = 5.0000005
+offset_right = 100.666664
+offset_bottom = 25.0
 theme_override_fonts/font = ExtResource("3_vpdu5")
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 10
 text = "BEGIN THE HUNT "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -112,18 +116,18 @@ vertical_alignment = 1
 unique_name_in_owner = true
 modulate = Color(3.946722e-06, 0.9440566, 0.2744684, 1)
 layout_mode = 2
-texture_normal = ExtResource("3_ctwoq")
-texture_pressed = ExtResource("3_ctwoq")
+texture_normal = ExtResource("5_ppfnh")
+texture_pressed = ExtResource("5_ppfnh")
 texture_hover = ExtResource("3_ctwoq")
 
 [node name="Label" type="Label" parent="CenterContainer/Control/VBoxContainer/QUIT"]
 layout_mode = 0
-offset_left = 27.333334
-offset_top = 3.3333335
-offset_right = 67.333336
+offset_left = 18.666668
+offset_top = 3.3333333
+offset_right = 75.66667
 offset_bottom = 26.333334
 theme_override_fonts/font = ExtResource("3_vpdu5")
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 15
 text = "ABANDON"
 horizontal_alignment = 1
 vertical_alignment = 1

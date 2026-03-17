@@ -34,7 +34,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_7jktm"]
 resource_name = "Ready"
 length = 0.6
-loop_mode = 1
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -89,7 +89,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_eow3j"]
 resource_name = "ShowGameOver"
-length = 0.7
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -97,7 +97,7 @@ tracks/0/path = NodePath("Background:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -109,7 +109,7 @@ tracks/1/path = NodePath("CenterContainer/MenuPivot/MenuBox:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7),
+"times": PackedFloat32Array(0, 0.43333334),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
@@ -243,7 +243,6 @@ autostart = true
 unique_name_in_owner = true
 process_mode = 3
 layer = 100
-visible = false
 
 [node name="Background" type="ColorRect" parent="GameOver"]
 modulate = Color(1, 1, 1, 0)
@@ -269,35 +268,35 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="MenuBox" type="VBoxContainer" parent="GameOver/CenterContainer/MenuPivot"]
-layout_mode = 0
-offset_left = -274.0
-offset_top = -164.0
-offset_right = 273.0
-offset_bottom = 164.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)
 theme_override_constants/separation = 30
 
 [node name="Title" type="Label" parent="GameOver/CenterContainer/MenuPivot/MenuBox"]
+modulate = Color(0.9999426, 0.5332827, 0.47172076, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ryrav")
 theme_override_font_sizes/font_size = 50
-text = "\"DOMAIN COLLAPSED\"
+text = "   \"THE CRIMSON IS STILL HUNGRY\"
 "
 
-[node name="ScoreLable" type="Label" parent="GameOver/CenterContainer/MenuPivot/MenuBox"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_ryrav")
-text = "\"Purged: 0\""
-
 [node name="RestartButton" type="Button" parent="GameOver/CenterContainer/MenuPivot/MenuBox"]
+modulate = Color(0.93304926, 0, 0.033403896, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ryrav")
 theme_override_font_sizes/font_size = 25
 text = "RESTART HUNT"
 
 [node name="QuitButton" type="Button" parent="GameOver/CenterContainer/MenuPivot/MenuBox"]
+modulate = Color(0.25490198, 1, 0.08235294, 1)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ryrav")
+theme_override_font_sizes/font_size = 25
 text = "\"ABANDON\""
 
 [node name="GameOverUI" type="AnimationPlayer" parent="GameOver"]
@@ -307,6 +306,7 @@ libraries = {
 }
 
 [node name="EliteTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 10.0
 autostart = true
 
