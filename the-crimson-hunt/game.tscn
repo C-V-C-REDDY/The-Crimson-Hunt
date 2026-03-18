@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://2tp8p1wld640"]
+[gd_scene load_steps=17 format=3 uid="uid://2tp8p1wld640"]
 
 [ext_resource type="PackedScene" uid="uid://cnwr5y20ibyjf" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://53uldjxrrg5h" path="res://game.gd" id="1_fc0e3"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://c157b3i5g60yy" path="res://characters/happy_boo/MetalMania-Regular.ttf" id="2_ryrav"]
 [ext_resource type="Texture2D" uid="uid://cu33xbu7du5h1" path="res://pistol/30.png" id="3_7jktm"]
 [ext_resource type="Script" uid="uid://dqpk0jhtjsuff" path="res://score_lable.gd" id="4_fc0e3"]
+[ext_resource type="AudioStream" uid="uid://tydsuea0uprw" path="res://addons/colorpicker_presets/Chamber_of_Whispers.mp3" id="7_eow3j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jktm"]
 bg_color = Color(1.4948927, 0, 0.39436692, 1)
@@ -309,6 +310,12 @@ libraries = {
 unique_name_in_owner = true
 wait_time = 10.0
 autostart = true
+
+[node name="GameAmbience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_eow3j")
+volume_db = -25.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

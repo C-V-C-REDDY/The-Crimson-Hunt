@@ -10,7 +10,9 @@ func _ready():
 
 
 func _on_start_pressed() -> void:
+	%MenuMusic.stop()
 	get_tree().change_scene_to_file("res://game.tscn")
+	
 	
 func idle_flicker_animation():
 	animation_player.play("idle_flicker")
