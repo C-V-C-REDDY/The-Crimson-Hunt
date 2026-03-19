@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://xy64rri06jjk"
+path="res://.godot/imported/dragon-studio-deep-haunting-drone-482880 (mp3cut.net).mp3-80eb5254d7ced0c1d21d57a60728b9cc.mp3str"
+
+[deps]
+
+source_file="res://addons/colorpicker_presets/dragon-studio-deep-haunting-drone-482880 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/dragon-studio-deep-haunting-drone-482880 (mp3cut.net).mp3-80eb5254d7ced0c1d21d57a60728b9cc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

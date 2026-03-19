@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://duhiqf6i1a2mg"]
+[gd_scene load_steps=6 format=3 uid="uid://duhiqf6i1a2mg"]
 
 [ext_resource type="PackedScene" uid="uid://ogik4s70pgwl" path="res://characters/slime/slime.tscn" id="1_dy6sc"]
 [ext_resource type="Script" uid="uid://b2glabx871xy0" path="res://mob.gd" id="1_nokgg"]
+[ext_resource type="AudioStream" uid="uid://b8odv7gk0p4bc" path="res://addons/colorpicker_presets/686321__cjspellsfish__punch-land-soft.wav" id="3_ubaqv"]
+[ext_resource type="AudioStream" uid="uid://y7c0amo5xjc4" path="res://addons/colorpicker_presets/Death.ogg" id="4_p11y5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dy6sc"]
 radius = 26.172504
@@ -17,3 +19,16 @@ unique_name_in_owner = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14)
 shape = SubResource("CircleShape2D_dy6sc")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_ubaqv")
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_p11y5")
+volume_db = -15.0
+max_polyphony = 2
+bus = &"SFX"

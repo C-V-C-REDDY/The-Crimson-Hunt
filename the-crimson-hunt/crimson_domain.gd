@@ -30,6 +30,7 @@ func start_crimson_charge():
 	is_charging = true
 	has_burst_fired = false 
 	charge_timer.start(5.0)
+	%RumbleSFX.play()
 	print("Domain Charging...")
 
 func update_charge_effects():

@@ -313,7 +313,7 @@ autostart = true
 
 [node name="GameAmbience" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_eow3j")
-volume_db = -25.0
+volume_db = -30.0
 autoplay = true
 bus = &"Music"
 

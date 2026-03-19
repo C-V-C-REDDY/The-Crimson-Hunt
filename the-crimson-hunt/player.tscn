@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnwr5y20ibyjf"]
+[gd_scene load_steps=18 format=3 uid="uid://cnwr5y20ibyjf"]
 
 [ext_resource type="Script" uid="uid://dmukwvwmyll02" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="PackedScene" uid="uid://bov4fmvvngu1p" path="res://mc.tscn" id="2_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://br337d1tt6grv" path="res://gun.tscn" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://jhkr0qb1qy5q" path="res://crimson_domain.gd" id="4_hqtel"]
+[ext_resource type="AudioStream" uid="uid://xy64rri06jjk" path="res://addons/colorpicker_presets/dragon-studio-deep-haunting-drone-482880 (mp3cut.net).mp3" id="5_sweqy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
 radius = 33.24154
@@ -48,21 +49,6 @@ scale_max = 5.0
 scale_curve = SubResource("CurveTexture_hqtel")
 color = Color(0.98, 0.36390665, 0.078399986, 0.3764706)
 
-[sub_resource type="Animation" id="Animation_hqtel"]
-resource_name = "flash"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.56, 0, 0.0093331905, 0), Color(0.56, 0, 0.0093331905, 0.74509805), Color(0.56, 0, 0.0093331905, 0), Color(0.56, 0, 0.0093331905, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_sweqy"]
 length = 0.001
 tracks/0/type = "value"
@@ -76,6 +62,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0.56, 0, 0.0093331905, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hqtel"]
+resource_name = "flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.56, 0, 0.0093331905, 0), Color(0.56, 0, 0.0093331905, 0.74509805), Color(0.56, 0, 0.0093331905, 0), Color(0.56, 0, 0.0093331905, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2hs0m"]
@@ -143,6 +144,12 @@ script = ExtResource("4_hqtel")
 one_shot = true
 
 [node name="ShakeTimer" type="Timer" parent="CrimsonDomain"]
+
+[node name="RumbleSFX" type="AudioStreamPlayer2D" parent="CrimsonDomain"]
+unique_name_in_owner = true
+stream = ExtResource("5_sweqy")
+volume_db = 10.0
+bus = &"SFX"
 
 [node name="RedFlash" type="CanvasLayer" parent="."]
 
